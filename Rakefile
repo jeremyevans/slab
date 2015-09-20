@@ -1,5 +1,10 @@
 require 'rake'
 
+desc "Run the app with puma"
+task :run do
+  sh 'puma -e production config.ru'
+end
+
 namespace :db do
   desc "Create the user and database for Slab"
   task :create do

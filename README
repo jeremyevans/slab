@@ -18,3 +18,8 @@ Rakefile and a rake task for creating the user and database for Slab.
 
 We'll be using the ruby Sequel library for accessing PostgreSQL.
 We first define the table used for data storage via a Sequel migration.
+
+= 3
+
+We'll be using the ruby Roda web framework.  We'll start with a simple
+hello world in Roda.

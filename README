@@ -33,3 +33,8 @@ uploading a document image.
 
 We'll start storing uploaded files, without OCRing them.  To do that,
 we'll add a Sequel model.
+
+= 6
+
+Currently, we aren't showing any of the uploaded documents.  Let's start
+doing that.

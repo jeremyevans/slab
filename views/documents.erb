@@ -1,0 +1,7 @@
+<% @title = 'Uploaded Document Images' %>
+
+<ul>
+  <% @docs.each do |d| %>
+    <li><a href="/document/<%= d.id %>"><%= d.path %></a></li>
+  <% end %>
+</ul>

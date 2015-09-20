@@ -13,3 +13,8 @@ is recommended.
 
 We'll be using PostgreSQL for Slab's data storage.  We first add a
 Rakefile and a rake task for creating the user and database for Slab.
+
+= 2
+
+We'll be using the ruby Sequel library for accessing PostgreSQL.
+We first define the table used for data storage via a Sequel migration.

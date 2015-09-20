@@ -6,4 +6,9 @@ namespace :db do
     sh 'echo "CREATE USER slab PASSWORD \'slab\'" | psql -U postgres'
     sh 'createdb -U postgres -O slab slab'
   end
+
+  desc "Migrate the database up"
+  task :up do
+    sh 'sequel -m migrate "postgres:///?user=slab&password=slab"'
+  end
 end

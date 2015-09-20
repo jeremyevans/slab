@@ -3,3 +3,13 @@
 Welcome to the Slab tutorial.  This tutorial is going to walk you through
 building a simple ruby web application that does OCR (optical character
 recognition) on uploaded files.
+
+= 1
+
+When designing a website, the most important thing to consider is data
+storage.  In most cases, the data the application stores is much more
+valuable than the application itself, so starting with the data design
+is recommended.
+
+We'll be using PostgreSQL for Slab's data storage.  We first add a
+Rakefile and a rake task for creating the user and database for Slab.

@@ -28,3 +28,8 @@ hello world in Roda.
 
 We'll expand on our hello world to use a layout and have a page for
 uploading a document image.
+
+= 5
+
+We'll start storing uploaded files, without OCRing them.  To do that,
+we'll add a Sequel model.

@@ -1,0 +1,5 @@
+= 0
+
+Welcome to the Slab tutorial.  This tutorial is going to walk you through
+building a simple ruby web application that does OCR (optical character
+recognition) on uploaded files.

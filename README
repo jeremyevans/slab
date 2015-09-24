@@ -50,3 +50,7 @@ system, using PostgreSQL's LISTEN/NOTIFY.
 
 Now that we can get the text of uploaded files, lets try adding a
 search engine, so you can search for text and see the uploaded image.
+
+= 9
+
+Let's speed up our full text search using a full text index.

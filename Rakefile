@@ -5,6 +5,11 @@ task :run do
   sh 'puma -e production config.ru'
 end
 
+desc "Run the OCR processor"
+task :ocr do
+  sh "#{FileUtils::RUBY} ocr.rb"
+end
+
 namespace :db do
   desc "Create the user and database for Slab"
   task :create do

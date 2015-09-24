@@ -38,3 +38,10 @@ we'll add a Sequel model.
 
 Currently, we aren't showing any of the uploaded documents.  Let's start
 doing that.
+
+= 7
+
+Let's actually start doing OCR on uploaded documents.  Unfortunately,
+the OCR process takes a long time, so you don't want to do it while
+handling a request.  Instead, we'll handle it using a background job
+system, using PostgreSQL's LISTEN/NOTIFY.

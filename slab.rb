@@ -36,7 +36,8 @@ class Slab < Roda
 
       r.post do
         image = r['image']
-        Document.create(:image=>image[:tempfile].read, :path=>image[:filename])
+        d = Document.create(:image=>image[:tempfile].read, :path=>image[:filename])
+        DB.notify('ocr', :payload=>d.id)
         r.redirect
       end
     end

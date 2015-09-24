@@ -59,3 +59,8 @@ Let's speed up our full text search using a full text index.
 
 Next we'll add support for uploading document images using a
 command line program instead of the web interface.
+
+= 11
+
+Now that we can upload a bunch of documents images at once, let's
+make the OCR process multithreaded.

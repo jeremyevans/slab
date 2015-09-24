@@ -54,3 +54,8 @@ search engine, so you can search for text and see the uploaded image.
 = 9
 
 Let's speed up our full text search using a full text index.
+
+= 10
+
+Next we'll add support for uploading document images using a
+command line program instead of the web interface.

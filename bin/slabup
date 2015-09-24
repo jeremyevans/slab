@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'net/http/post/multipart'
+require 'optparse'
+
+url = 'http://localhost:9292/upload'
+
+options = OptionParser.new do |opts|
+  opts.define_head "Usage: slabup [options] [file]"
+  opts.on("-u", "use the given URL") do  |u|
+    url = u
+  end
+end
+options.parse!
+
+url = URI.parse(url)
+
+ARGV.each do |filename|
+  print "Uploading #{filename}"
+  begin
+    File.open(filename) do |file|
+      req = Net::HTTP::Post::Multipart.new(url.path,
+        "image" => UploadIO.new(file, "image", File.basename(file)))
+
+      res = Net::HTTP.start(url.host, url.port) do |http|
+        http.request(req)
+      end
+
+      puts " finished."
+    end
+  rescue
+    puts " ERROR!"
+  end
+end

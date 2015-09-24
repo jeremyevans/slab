@@ -45,3 +45,8 @@ Let's actually start doing OCR on uploaded documents.  Unfortunately,
 the OCR process takes a long time, so you don't want to do it while
 handling a request.  Instead, we'll handle it using a background job
 system, using PostgreSQL's LISTEN/NOTIFY.
+
+= 8
+
+Now that we can get the text of uploaded files, lets try adding a
+search engine, so you can search for text and see the uploaded image.

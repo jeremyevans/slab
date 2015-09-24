@@ -17,6 +17,12 @@ class Slab < Roda
       :documents
     end
 
+    r.get "search" do
+      @title = 'Search Results'
+      @docs = Document.select(:id, :path).full_text_search(:text, r['q']).all
+      :documents
+    end
+
     r.on "document/:d" do |doc_id|
       @doc = Document.with_pk!(doc_id)
 

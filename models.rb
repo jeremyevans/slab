@@ -1,5 +1,12 @@
 require 'sequel'
 
+unless defined?(Unreloader)
+  require 'rack/unreloader'
+  Unreloader = Rack::Unreloader.new(:reload=>false)
+end
+
 DB = Sequel.postgres(:user=>'slab', :password=>'slab')
 
-Dir['./models/*'].each{|f| require f}
+Unreloader.require('models') do |f|
+  Sequel::Model.send(:camelize, File.basename(f).sub(/\.rb\z/, ''))
+end

@@ -87,3 +87,9 @@ as .tif documents.  Let's handle those cases now.
 Our OCR program is so useful that other people want to use it, but they
 only want to see documents they uploaded.  So let's go multiuser and add
 an authentication framework.
+
+= 16
+
+When we went multiuser, our command line uploader broke, since it tries
+to post without including the CSRF token.  Let's reallow command line
+uploads using a token for authentication.

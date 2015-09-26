@@ -3,16 +3,17 @@
 require 'net/http/post/multipart'
 require 'optparse'
 
-url = 'http://localhost:9292/upload'
+url = 'http://localhost:9292/slabup'
 
 options = OptionParser.new do |opts|
-  opts.define_head "Usage: slabup [options] [file]"
+  opts.define_head "Usage: slabup [options] token [file]"
   opts.on("-u", "use the given URL") do  |u|
     url = u
   end
 end
 options.parse!
 
+url << '/' << ARGV.shift
 url = URI.parse(url)
 
 ARGV.each do |filename|

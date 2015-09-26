@@ -74,3 +74,11 @@ the application and the related models.
 
 Next we'll start using the Bootstrap CSS framework so things look a
 little less ugly. 
+
+= 14
+
+When we originally started displaying the uploaded images, we weren't
+correctly setting the Content-Type when serving the image, and we
+weren't handling image types that aren't viewable by the browser, such
+as .tif documents.  Let's handle those cases now.
+

@@ -31,6 +31,10 @@ class Slab < Roda
       end
 
       r.get 'image' do
+        response['Content-Type'] = @doc.content_type
+        unless @doc.viewable?
+          response['Content-Disposition'] = "attachment; filename=#{@doc.path.inspect}"
+        end
         @doc.image
       end
     end

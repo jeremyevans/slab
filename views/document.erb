@@ -2,8 +2,12 @@
 
 Path: <%= @doc.path %><br />
 
-<img width="800" src="/document/<%= @doc.id %>/image" /><br />
-
+<% if @doc.viewable? %>
+  <img width="800" src="/document/<%= @doc.id %>/image" />
+<% else %>
+  <a href="/document/<%= @doc.id %>/image">Download</a>
+<% end %>
+<br />
 <% if @doc.text %>
   Text: <pre><%= @doc.text %></pre>
 <% end %>

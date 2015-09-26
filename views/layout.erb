@@ -16,6 +16,13 @@
         <ul class="nav navbar-nav">
           <li><a href="/documents">Uploaded Documents</a></li>
         </ul>
+
+        <% if rodauth.logged_in? %>
+          <form action="/auth/logout" method="post" class="navbar-form">
+            <%== csrf_tag %>
+            <input type="submit" value="Logout" class="btn btn-warning pull-right form-control">
+          </form>
+        <% end %>
       </div>
     </nav>
 

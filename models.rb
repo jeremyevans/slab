@@ -1,4 +1,5 @@
 require 'sequel'
+require 'securerandom'
 
 unless defined?(Unreloader)
   require 'rack/unreloader'

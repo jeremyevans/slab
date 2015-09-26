@@ -82,3 +82,8 @@ correctly setting the Content-Type when serving the image, and we
 weren't handling image types that aren't viewable by the browser, such
 as .tif documents.  Let's handle those cases now.
 
+= 15
+
+Our OCR program is so useful that other people want to use it, but they
+only want to see documents they uploaded.  So let's go multiuser and add
+an authentication framework.

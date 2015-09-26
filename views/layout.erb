@@ -2,13 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <title>Slab - <%= @title %></title>
   </head>
   
   <body>
-    <% if @title %>
-      <h1><%= @title %></h1>
-    <% end %>
-    <%== yield %>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/upload" class="navbar-brand">Slab</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+          <li><a href="/documents">Uploaded Documents</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <% if @title %>
+        <h1><%= @title %></h1>
+      <% end %>
+      <%== yield %>
+    </div>
   </body>
 </html>

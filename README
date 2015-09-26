@@ -69,3 +69,8 @@ make the OCR process multithreaded.
 
 In order to make development easier, we'll add support for reloading
 the application and the related models.
+
+= 13
+
+Next we'll start using the Bootstrap CSS framework so things look a
+little less ugly. 

@@ -25,7 +25,8 @@ end
 Thread.new do
   DB.listen('ocr',
             :after_listen=>proc{QUEUE.push nil},
-            :loop=>true) do |_, _, document_id|
+            :loop=>true) do |_, _, data|
+    document_id = data.split('-', 2)[1]
     QUEUE.push(document_id)
   end
 end

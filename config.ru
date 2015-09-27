@@ -7,4 +7,5 @@ Unreloader = Rack::Unreloader.new(:subclasses=>%w'Roda Sequel::Model',
 
 require './models'
 Unreloader.require('slab.rb'){'Slab'}
+use Rack::CommonLogger, Logger.new($stdout) unless dev
 run(dev ? Unreloader : Slab.freeze.app)

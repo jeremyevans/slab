@@ -93,3 +93,12 @@ an authentication framework.
 When we went multiuser, our command line uploader broke, since it tries
 to post without including the CSRF token.  Let's reallow command line
 uploads using a token for authentication.
+
+= 17
+
+The last part of our OCR web application is also the most complex. We'll
+be adding a websocket to our page that lists uploaded document images,
+so that the page gets updated in real time as documents are uploaded.
+We'll use the Roda websocket plugin in the backend, and we'll write the
+front end in ruby using the Opal ruby-to-javascript compiler, using the
+opal-browser library to make things easier.

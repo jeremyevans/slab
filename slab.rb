@@ -1,5 +1,7 @@
 require 'roda'
 require 'tilt/erubis'
+require 'tilt/opal'
+require 'opal/browser'
 require './models'
 
 class Slab < Roda
@@ -17,7 +19,70 @@ class Slab < Roda
     skip_status_checks? true
   end
 
+  plugin :websockets, :ping=>45
+
+  plugin :error_handler do |e|
+    puts e
+    puts e.backtrace
+    "Oops!"
+  end
+
+  builder = Opal::Builder.new(:stubs=>['opal'])
+  builder.append_paths('assets/js')
+  builder.use_gem('opal-browser')
+  plugin :assets, :js=>%w'slab.rb', :js_opts=>{:builder=>builder}
+
+  class Listener
+    MUTEX = Mutex.new
+    LISTENERS = {}
+
+    attr_reader :account_id
+    attr_reader :websocket
+
+    def self.sync(&block)
+      MUTEX.synchronize(&block)
+    end
+
+    def self.notify(account_id, doc_id, path)
+      sync do
+        if listeners = LISTENERS[account_id.to_i] 
+          listeners.each do |listener|
+            listener.websocket.send("#{doc_id}-#{path}")
+          end
+        end
+      end
+    end
+
+    def initialize(account_id, ws)
+      @account_id = account_id
+      @websocket = ws
+      sync{(LISTENERS[account_id] ||=  []) << self}
+    end
+
+    def close
+      sync do
+        listeners = LISTENERS[@account_id] 
+        listeners.delete(self)
+        LISTENERS.delete(@account_id) if listeners.empty?
+      end
+    end
+
+    private
+
+    def sync(&block)
+      self.class.sync(&block)
+    end
+  end
+
+  Thread.new do
+    DB.listen('ocr', :loop=>true) do |_, _, data|
+      Listener.notify(*data.split('-', 3))
+    end
+  end
+
   route do |r|
+    r.assets
+
     r.on 'auth' do
       r.rodauth
     end
@@ -37,6 +102,14 @@ class Slab < Roda
     end
     
     r.get "documents" do
+      r.websocket do |ws|
+        listener = Listener.new(rodauth.session_value, ws)
+
+        ws.on(:close) do |event|
+          listener.close
+        end
+      end
+
       @docs = ds.select(:id, :path).all
       :documents
     end
@@ -78,7 +151,7 @@ class Slab < Roda
   def handle_upload(account_id)
     image = request['image']
     d = Document.create(:account_id=>account_id, :image=>image[:tempfile].read, :path=>image[:filename])
-    DB.notify('ocr', :payload=>d.id)
+    DB.notify('ocr', :payload=>"#{account_id}-#{d.id}-#{d.path}")
     d
   end
 end

@@ -1,6 +1,6 @@
 <% @title ||= 'Uploaded Document Images' %>
 
-<ul>
+<ul id="document-image-list">
   <% @docs.each do |d| %>
     <li><a href="/document/<%= d.id %>"><%= d.path %></a></li>
   <% end %>

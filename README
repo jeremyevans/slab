@@ -1,3 +1,22 @@
+= Slab Tutorial
+
+This tutorial is a walkthrough of building a simple OCR web application.
+First, install the necessary gems:
+
+  gem install -g Gemfile
+
+Second, make sure tesseract (OCR program) is installed.  How you do this
+depends on the operating system you are using.
+
+Then, start the tutorial by going to the first commit:
+
+  git checkout 0
+
+After reviewing the README and changes in that commit, you can move to
+the next commit:
+
+  git checkout 1
+
 = 0
 
 Welcome to the Slab tutorial.  This tutorial is going to walk you through
